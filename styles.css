@@ -1,61 +1,186 @@
-:root{
-  --bg:#f4f6f8;
-  --card:#ffffff;
-  --accent:#0b74de;
-  --text:#222;
-}
-*{box-sizing:border-box}
-body{
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
-  color:var(--text);
-  margin:0;
-  padding:20px;
-}
-.container{
-  max-width:980px;
-  margin:0 auto;
-  background:var(--card);
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.06);
-}
-header h1{margin:0;font-size:1.4rem}
-header p{margin:4px 0 8px;font-size:0.9rem;color:#555}
-header h2{margin-top:8px;font-size:1.05rem;color:var(--accent)}
-
-.ot-row{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  margin:12px 0;
-}
-.ot-row input[type="text"]{width:120px;padding:6px;border-radius:4px;border:1px solid #ccc}
-.ot-row button{padding:8px 10px;border-radius:6px;border:none;background:var(--accent);color:white;cursor:pointer}
-.ot-row button#clearBtn{background:#888}
-
-form fieldset{
-  border:1px solid #e0e6ef;
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:6px;
-}
-fieldset legend{font-weight:600}
-label{display:block;margin:6px 0}
-label input[type="text"],
-label input[type="date"],
-label input[type="number"],
-label input[type="email"],
-textarea{width:98%;padding:6px;border-radius:4px;border:1px solid #ccc}
-
-.checkbox-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-  gap:6px;
+:root {
+  --color-primary: #f26522;
+  --color-dark: #222;
+  --color-gray: #eee;
+  --color-border: #dcdcdc;
+  --color-text: #333;
 }
 
-.firmas{display:flex;gap:12px}
-.firmas label{flex:1}
+body {
+  margin: 0;
+  background: var(--color-gray);
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-text);
+}
 
-.notas{font-size:0.9rem;margin-top:8px}
-footer{text-align:center;color:#666;margin-top:12px;font-size:0.85rem}
+.wrapper {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background: var(--color-dark);
+  color: white;
+  padding: 15px 20px;
+  gap: 15px;
+}
+
+header .logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+header p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+header small {
+  display: block;
+  opacity: 0.8;
+}
+
+main {
+  padding: 20px;
+}
+
+.ot-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-gray);
+  border: 1px solid var(--color-border);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.ot-num {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ot-num input {
+  width: 100px;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  padding: 6px;
+  background: #fff;
+  color: var(--color-dark);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+button i {
+  width: 16px;
+  height: 16px;
+}
+
+button:hover {
+  background: #d95718;
+}
+
+button.danger {
+  background: #b51b1b;
+}
+
+fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+}
+
+legend {
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+label {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+input,
+textarea {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 0.9rem;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 6px;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.firmas {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notas {
+  font-size: 0.85rem;
+  background: #fafafa;
+  border-left: 4px solid var(--color-primary);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+footer {
+  text-align: center;
+  background: var(--color-dark);
+  color: white;
+  padding: 10px;
+  font-size: 0.9rem;
+}
