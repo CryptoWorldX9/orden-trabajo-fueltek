@@ -6,15 +6,15 @@
   <title>Orden de Trabajo - Fueltek</title>
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Librerías externas -->
+  <!-- Librerías -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="wrapper">
     <header>
-      <img src="https://i.ibb.co/Q8Dy0zZ/fueltek-logo.png" alt="Fueltek Logo" class="logo" />
-      <div>
+      <img src="logo-fueltek.png" alt="Fueltek Logo" class="logo" />
+      <div class="header-info">
         <h1>FUELTEK</h1>
         <p>Servicio Técnico Multimarca</p>
         <small>Teléfono: +56 9 4043 5805 | Dirección: La Trilla 1062, San Bernardo</small>
@@ -30,7 +30,8 @@
         <div class="buttons">
           <button id="newOtBtn"><i data-lucide="plus"></i>Nuevo OT</button>
           <button id="saveBtn"><i data-lucide="save"></i>Guardar</button>
-          <button id="exportBtn"><i data-lucide="download"></i>Exportar</button>
+          <button id="exportBtn"><i data-lucide="download"></i>Excel</button>
+          <button id="printBtn"><i data-lucide="printer"></i>Imprimir / PDF</button>
           <button id="clearBtn" class="danger"><i data-lucide="trash-2"></i>Borrar</button>
         </div>
       </div>
@@ -91,8 +92,14 @@
         </fieldset>
 
         <div class="firmas">
-          <label>Firma Taller:<input name="firmaTaller" /></label>
-          <label>Firma Cliente:<input name="firmaCliente" /></label>
+          <div>
+            <label>Firma Taller:</label>
+            <input name="firmaTaller" />
+          </div>
+          <div>
+            <label>Firma Cliente:</label>
+            <input name="firmaCliente" />
+          </div>
         </div>
 
         <section class="notas">
@@ -112,8 +119,6 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
