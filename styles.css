@@ -1,0 +1,61 @@
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --accent:#0b74de;
+  --text:#222;
+}
+*{box-sizing:border-box}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding:20px;
+}
+.container{
+  max-width:980px;
+  margin:0 auto;
+  background:var(--card);
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+header h1{margin:0;font-size:1.4rem}
+header p{margin:4px 0 8px;font-size:0.9rem;color:#555}
+header h2{margin-top:8px;font-size:1.05rem;color:var(--accent)}
+
+.ot-row{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin:12px 0;
+}
+.ot-row input[type="text"]{width:120px;padding:6px;border-radius:4px;border:1px solid #ccc}
+.ot-row button{padding:8px 10px;border-radius:6px;border:none;background:var(--accent);color:white;cursor:pointer}
+.ot-row button#clearBtn{background:#888}
+
+form fieldset{
+  border:1px solid #e0e6ef;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:6px;
+}
+fieldset legend{font-weight:600}
+label{display:block;margin:6px 0}
+label input[type="text"],
+label input[type="date"],
+label input[type="number"],
+label input[type="email"],
+textarea{width:98%;padding:6px;border-radius:4px;border:1px solid #ccc}
+
+.checkbox-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:6px;
+}
+
+.firmas{display:flex;gap:12px}
+.firmas label{flex:1}
+
+.notas{font-size:0.9rem;margin-top:8px}
+footer{text-align:center;color:#666;margin-top:12px;font-size:0.85rem}
