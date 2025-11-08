@@ -1,6 +1,3 @@
-// script.js
-// Manejo simple de OT auto-incremental, guardado en localStorage y exportación a Excel usando SheetJS
-
 const OT_KEY = "fueltek_last_ot";
 const ORDERS_KEY = "fueltek_orders";
 
@@ -12,99 +9,70 @@ document.addEventListener("DOMContentLoaded", () => {
   const clearBtn = document.getElementById("clearBtn");
   const form = document.getElementById("otForm");
 
-  function getLastOt(){
-    const raw = localStorage.getItem(OT_KEY);
-    return raw ? parseInt(raw, 10) : 726; // posicionamos en 726 para que al crear la primera quede 727
-  }
-  function setLastOt(n){
-    localStorage.setItem(OT_KEY, String(n));
-  }
-  function nextOt(){
-    let last = getLastOt();
-    last = last + 1;
-    setLastOt(last);
-    return last;
+  function getLastOt() {
+    return parseInt(localStorage.getItem(OT_KEY) || "726", 10);
   }
 
-  function setOtField(n){
-    otInput.value = String(n);
+  function setLastOt(n) {
+    localStorage.setItem(OT_KEY, n);
   }
 
-  // Inicializa mostrando el siguiente OT disponible si no hay uno en el campo
-  if(!otInput.value) setOtField(getLastOt() + 1);
+  function nextOt() {
+    const next = getLastOt() + 1;
+    setLastOt(next);
+    return next;
+  }
 
-  newOtBtn.addEventListener("click", () => {
-    const n = nextOt();
-    setOtField(n);
-    alert("Nuevo N° OT asignado: " + n);
-  });
+  function updateOtDisplay() {
+    otInput.value = getLastOt() + 1;
+  }
 
-  function readForm(){
+  updateOtDisplay();
+
+  newOtBtn.onclick = () => {
+    const newNum = nextOt();
+    otInput.value = newNum;
+    alert("Nuevo número OT asignado: " + newNum);
+  };
+
+  saveBtn.onclick = (e) => {
+    e.preventDefault();
     const fd = new FormData(form);
-    const obj = {};
-    for (const [k,v] of fd.entries()){
-      if(k === "accesorios") continue;
-      obj[k] = v;
+    const data = {};
+    for (const [k, v] of fd.entries()) {
+      if (k === "accesorios") continue;
+      data[k] = v;
     }
-    // accesorios: todas las checkboxes marcadas
-    const accesorios = [];
-    form.querySelectorAll("input[name='accesorios']:checked").forEach(ch => accesorios.push(ch.value));
-    obj.accesorios = accesorios.join(", ");
-    obj.ot = otInput.value || (getLastOt()+1);
-    obj.timestamp = new Date().toISOString();
-    return obj;
-  }
-
-  function saveOrder(){
-    const order = readForm();
-    // Si el OT del formulario es mayor que el stored last, actualizamos
-    const currentLast = getLastOt();
-    const otNum = parseInt(order.ot,10);
-    if(otNum > currentLast) setLastOt(otNum);
+    const acc = Array.from(form.querySelectorAll("input[name='accesorios']:checked"))
+      .map(c => c.value)
+      .join(", ");
+    data.accesorios = acc;
+    data.ot = otInput.value;
+    data.fechaGuardado = new Date().toLocaleString();
 
     const all = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
-    all.push(order);
+    all.push(data);
     localStorage.setItem(ORDERS_KEY, JSON.stringify(all));
-    alert("Orden guardada localmente.");
-  }
 
-  function exportToExcel(){
+    alert("Orden guardada correctamente ✅");
+  };
+
+  exportBtn.onclick = (e) => {
+    e.preventDefault();
     const all = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
-    if(all.length === 0){
-      alert("No hay órdenes guardadas para exportar.");
-      return;
-    }
-    // Convertir a worksheet
+    if (all.length === 0) return alert("No hay órdenes para exportar");
     const ws = XLSX.utils.json_to_sheet(all);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Ordenes");
-    // Generar archivo y forzar descarga
     XLSX.writeFile(wb, "Ordenes_Fueltek.xlsx");
-  }
+  };
 
-  function clearData(){
-    if(confirm("¿Estás seguro de borrar todas las órdenes guardadas? Esta acción no se puede deshacer.")){
+  clearBtn.onclick = () => {
+    if (confirm("¿Seguro que deseas borrar todas las órdenes guardadas?")) {
       localStorage.removeItem(ORDERS_KEY);
       localStorage.removeItem(OT_KEY);
-      // reiniciar last ot para que el próximo sea 727
-      setLastOt(726);
-      setOtField(727);
-      alert("Datos borrados. El próximo N° OT será 727.");
+      updateOtDisplay();
+      alert("Datos eliminados. Reiniciado a OT #727.");
     }
-  }
-
-  saveBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    saveOrder();
-  });
-
-  exportBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    exportToExcel();
-  });
-
-  clearBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    clearData();
-  });
+  };
 });
