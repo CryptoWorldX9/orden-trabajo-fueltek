@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper" id="formArea">
     <header>
       <img src="logo-fueltek.png" alt="Fueltek Logo" class="logo" />
       <div class="header-info">
@@ -32,6 +32,8 @@
           <button id="saveBtn"><i data-lucide="save"></i>Guardar</button>
           <button id="exportBtn"><i data-lucide="download"></i>Excel</button>
           <button id="printBtn"><i data-lucide="printer"></i>Imprimir / PDF</button>
+          <button id="backupBtn"><i data-lucide="database"></i>Respaldo</button>
+          <button id="importBtn"><i data-lucide="upload"></i>Importar</button>
           <button id="clearBtn" class="danger"><i data-lucide="trash-2"></i>Borrar</button>
         </div>
       </div>
@@ -61,23 +63,23 @@
         <fieldset>
           <legend>Revisión y Accesorios Recibidos</legend>
           <div class="checkbox-grid">
-            <label><input type="checkbox" name="accesorios" value="Motosierra" /> Motosierra</label>
-            <label><input type="checkbox" name="accesorios" value="Desbrozadora" /> Desbrozadora</label>
-            <label><input type="checkbox" name="accesorios" value="Cortasetos" /> Cortasetos</label>
-            <label><input type="checkbox" name="accesorios" value="Corta Césped" /> Corta Césped</label>
-            <label><input type="checkbox" name="accesorios" value="Fumigadora" /> Fumigadora</label>
-            <label><input type="checkbox" name="accesorios" value="Sopladora" /> Sopladora</label>
-            <label><input type="checkbox" name="accesorios" value="Espada" /> Espada</label>
-            <label><input type="checkbox" name="accesorios" value="Cadena" /> Cadena</label>
-            <label><input type="checkbox" name="accesorios" value="Pistón Rayado" /> Pistón Rayado</label>
-            <label><input type="checkbox" name="accesorios" value="Cilindro Rayado" /> Cilindro Rayado</label>
-            <label><input type="checkbox" name="accesorios" value="Bujía" /> Bujía</label>
-            <label><input type="checkbox" name="accesorios" value="Funda Espada" /> Funda Espada</label>
-            <label><input type="checkbox" name="accesorios" value="Tapa de Arranque" /> Tapa de Arranque</label>
-            <label><input type="checkbox" name="accesorios" value="Brazo Completo" /> Brazo Completo</label>
-            <label><input type="checkbox" name="accesorios" value="Cabezal" /> Cabezal</label>
-            <label><input type="checkbox" name="accesorios" value="Tubo" /> Tubo</label>
-            <label><input type="checkbox" name="accesorios" value="Manilla Arranque" /> Manilla Arranque</label>
+            <label><input type="checkbox" name="accesorios" value="Motosierra"> Motosierra</label>
+            <label><input type="checkbox" name="accesorios" value="Desbrozadora"> Desbrozadora</label>
+            <label><input type="checkbox" name="accesorios" value="Cortasetos"> Cortasetos</label>
+            <label><input type="checkbox" name="accesorios" value="Corta Césped"> Corta Césped</label>
+            <label><input type="checkbox" name="accesorios" value="Fumigadora"> Fumigadora</label>
+            <label><input type="checkbox" name="accesorios" value="Sopladora"> Sopladora</label>
+            <label><input type="checkbox" name="accesorios" value="Espada"> Espada</label>
+            <label><input type="checkbox" name="accesorios" value="Cadena"> Cadena</label>
+            <label><input type="checkbox" name="accesorios" value="Pistón Rayado"> Pistón Rayado</label>
+            <label><input type="checkbox" name="accesorios" value="Cilindro Rayado"> Cilindro Rayado</label>
+            <label><input type="checkbox" name="accesorios" value="Bujía"> Bujía</label>
+            <label><input type="checkbox" name="accesorios" value="Funda Espada"> Funda Espada</label>
+            <label><input type="checkbox" name="accesorios" value="Tapa de Arranque"> Tapa de Arranque</label>
+            <label><input type="checkbox" name="accesorios" value="Brazo Completo"> Brazo Completo</label>
+            <label><input type="checkbox" name="accesorios" value="Cabezal"> Cabezal</label>
+            <label><input type="checkbox" name="accesorios" value="Tubo"> Tubo</label>
+            <label><input type="checkbox" name="accesorios" value="Manilla Arranque"> Manilla Arranque</label>
           </div>
         </fieldset>
 
@@ -89,6 +91,21 @@
         <fieldset>
           <legend>Trabajo Realizado / Notas del Técnico</legend>
           <textarea name="trabajo" rows="4"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Valor y Estado de Pago</legend>
+          <div class="grid">
+            <label>Valor del Trabajo:<input name="valorTrabajo" type="number" step="0.01" /></label>
+            <label>Estado de Pago:
+              <select id="estadoPago" name="estadoPago">
+                <option value="Pagado">Pagado</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Abonado">Abonado</option>
+              </select>
+            </label>
+            <label id="abonadoGroup" style="display:none;">Monto Abonado:<input name="montoAbonado" type="number" step="0.01" /></label>
+          </div>
         </fieldset>
 
         <div class="firmas">
@@ -118,6 +135,7 @@
     </footer>
   </div>
 
+  <input type="file" id="importFile" accept=".json" style="display:none" />
   <script src="script.js"></script>
   <script>lucide.createIcons();</script>
 </body>
