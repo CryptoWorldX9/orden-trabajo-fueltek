@@ -1,144 +1,115 @@
 :root {
-  --primary: #f26522;
-  --dark: #222;
-  --border: #ccc;
-  --bg: #f8f8f8;
-  --white: #fff;
+  --color-primary: #f26522;
+  --color-dark: #222;
+  --color-border: #ddd;
+  --color-bg: #f6f7f9;
+  --color-light: #fff;
+  --max-width: 980px;
 }
 
+* { box-sizing: border-box; }
 body {
-  font-family: "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
   margin: 0;
-  color: #333;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--color-bg);
+  color: #222;
 }
 
 .wrapper {
-  max-width: 950px;
-  margin: 25px auto;
-  background: var(--white);
+  max-width: var(--max-width);
+  margin: 28px auto;
+  background: var(--color-light);
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
   overflow: hidden;
-  padding-bottom: 20px;
 }
 
 header {
   display: flex;
+  gap: 16px;
   align-items: center;
-  background: var(--dark);
+  background: var(--color-dark);
   color: white;
-  padding: 10px 20px;
+  padding: 14px 18px;
 }
-header .logo { width: 70px; height: 70px; object-fit: contain; margin-right: 15px; }
-header h1 { margin: 0; font-size: 1.6rem; letter-spacing: 1px; }
-header p { color: var(--primary); margin: 2px 0; }
-header small { opacity: 0.8; }
+.logo { width: 78px; height: 78px; object-fit: contain; border-radius: 6px; background: white; padding:6px; }
+.header-info h1 { margin: 0; font-size: 1.6rem; }
+.header-info p { margin: 3px 0; color: var(--color-primary); font-weight: 600; }
+.header-info small { opacity: 0.9; }
 
-main { padding: 20px; }
+main { padding: 18px; }
 
 .ot-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f4f4f4;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:#f5f6f7; border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; margin-bottom:16px;
 }
+.ot-num { display:flex; align-items:center; gap:10px; }
 .ot-num input {
-  width: 90px;
-  text-align: center;
-  font-weight: bold;
-  border: 2px solid var(--primary);
-  border-radius: 6px;
-  padding: 5px;
-}
-.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
-button {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--primary); color: white;
-  border: none; border-radius: 6px; padding: 7px 11px;
-  cursor: pointer; font-weight: 600;
-}
-button.danger { background: #b51b1b; }
-button:hover { background: #d95718; }
-
-fieldset {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  margin-bottom: 15px;
-  padding: 12px;
-}
-legend { color: var(--primary); font-weight: 600; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
+  width: 110px; text-align:center; font-weight:700; border-radius:6px;
+  border:2px solid var(--color-primary); padding:6px; background:#fff;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.9rem;
+.buttons { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+button, .import-label {
+  display:inline-flex; align-items:center; gap:8px; background:var(--color-primary); color:white; padding:8px 10px;
+  border-radius:8px; border:none; cursor:pointer; font-weight:600; text-decoration:none;
 }
-input, select, textarea {
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 6px;
-  font-size: 0.9rem;
+button:hover, .import-label:hover { background:#d95718; }
+button.danger { background:#b51b1b; }
+.import-label input { display:none; cursor:pointer; }
+
+fieldset { border:1px solid var(--color-border); border-radius:8px; padding:12px; margin-bottom:12px; }
+legend { color:var(--color-primary); font-weight:700; padding:0 6px; }
+
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:10px; }
+.stack { display:flex; flex-direction:column; gap:6px; font-size:0.92rem; }
+
+input[type="text"], input[type="email"], input[type="date"], input[type="number"], textarea, select {
+  padding:8px; border-radius:6px; border:1px solid var(--color-border); font-size:0.95rem;
 }
-textarea { resize: vertical; }
 
 .checkbox-grid {
-  display: grid;
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 4px 10px;
+  gap:8px 14px;
 }
-.checkbox-grid label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
+.checkbox-item {
+  display:flex; align-items:center; gap:10px; background:#fff; border-radius:6px; padding:6px 8px;
+  border:1px solid transparent;
 }
+.checkbox-item input[type="checkbox"] { width:18px; height:18px; margin:0; flex:0 0 auto; }
+
+textarea { min-height:72px; resize:vertical; }
+
+.grid-pay { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px; align-items:start; }
+.hidden { display:none !important; }
 
 .firmas {
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  margin: 25px 0;
+  display:flex; justify-content:center; gap:100px; margin:28px 0 18px;
 }
-.firmas div { text-align: center; width: 35%; }
+.firma-box { width:40%; text-align:center; }
+.firma-box input { width:100%; height:38px; }
 
 .notas {
-  font-size: 0.9rem;
-  background: #fafafa;
-  border-left: 4px solid var(--primary);
-  padding: 10px;
-  border-radius: 6px;
+  background:#fbfbfb; border-left:4px solid var(--color-primary); padding:10px; border-radius:6px; font-size:0.94rem;
 }
 
-footer {
-  background: var(--dark);
-  color: white;
-  text-align: center;
-  padding: 8px;
-}
+footer { background:var(--color-dark); color:white; padding:10px; text-align:center; }
 
-/* === IMPRESIÓN / PDF === */
+/* Printable area styles */
+.print-area { display:none; }
+
+/* PRINT STYLES: tamaño carta y presentación profesional */
+@page { size: letter; margin: 18mm; }
 @media print {
   body { background: white; }
-  .buttons { display: none !important; }
-  .wrapper {
-    box-shadow: none;
-    margin: 0;
-    width: 100%;
-  }
-  @page {
-    size: Letter;
-    margin: 10mm;
-  }
+  .buttons, .import-label, #newOtBtn, #saveBtn, #exportBtn, #printBtn, #exportDbBtn, #importFile, #clearBtn { display:none !important; }
+  .wrapper { box-shadow:none; border-radius:0; width:100%; }
+  header { background: transparent; color: black; display:flex; gap:12px; align-items:center; border-bottom:1px solid #ccc; padding:6px 0; }
+  .logo { background:transparent; padding:0; width:90px; height:90px; }
+  main, footer { padding:0; }
+  /* Mostrar el contenido del printArea en lugar del formulario */
+  body * { visibility:hidden; }
+  #printArea, #printArea * { visibility:visible; }
+  #printArea { position: absolute; left:0; top:0; width:100%; padding: 10mm; box-sizing: border-box; background:white; }
 }
