@@ -1,1 +1,11 @@
-
+{
+  "name": "Fueltek OT Manager",
+  "short_name": "Fueltek OT",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f26522",
+  "icons": [
+    { "src": "assets/logo-fueltek.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
