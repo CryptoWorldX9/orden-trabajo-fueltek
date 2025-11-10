@@ -1,1 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fueltek - Orden de Trabajo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <img src="assets/logo-fueltek.png" alt="Fueltek" class="logo"/>
+      <div class="header-info">
+        <h1>FUELTEK</h1>
+        <p class="subtitle">Servicio Técnico Multimarca</p>
+        <small>Tel: +56 9 4043 5805 | La Trilla 1062, San Bernardo</small>
+      </div>
+    </header>
 
+    <main>
+      <div class="ot-bar">
+        <div class="left">
+          <label class="ot-label">N° OT</label>
+          <input id="otNumber" readonly />
+        </div>
+        <div class="controls" id="controls"></div>
+      </div>
+
+      <form id="otForm" autocomplete="off" novalidate>
+        <fieldset><legend>Datos del Cliente</legend>
+          <div class="grid grid-2col spaced">
+            <label class="stack">Nombre del Cliente<input name="clienteNombre" required /></label>
+            <label class="stack">Teléfono<input name="clienteTelefono" /></label>
+            <label class="stack">Correo Electrónico<input name="clienteEmail" type="email" /></label>
+            <label class="stack">Fecha Recibida<input name="fechaRecibida" type="date" /></label>
+            <label class="stack">Fecha de Entrega<input name="fechaEntrega" type="date" /></label>
+            <div></div>
+          </div>
+        </fieldset>
+
+        <fieldset><legend>Datos de la Herramienta</legend>
+          <div class="grid grid-2col spaced">
+            <label class="stack">Marca<input name="marca" required /></label>
+            <label class="stack">Modelo<input name="modelo" /></label>
+            <label class="stack">N° de Serie<input name="serie" /></label>
+            <label class="stack">Año Fabricación<input name="anio" type="number" min="1900" max="2100" /></label>
+            <div></div><div></div>
+          </div>
+        </fieldset>
+
+        <fieldset><legend>Revisión y Accesorios Recibidos</legend>
+          <div class="checkbox-grid aligned" id="accessoriesGrid">
+            <!-- checkboxes generados por ui.js -->
+          </div>
+        </fieldset>
+
+        <fieldset><legend>Diagnóstico Inicial</legend>
+          <textarea name="diagnostico" rows="6" placeholder="Describa el diagnóstico ..."></textarea>
+        </fieldset>
+
+        <fieldset><legend>Trabajo Realizado / Notas del Técnico</legend>
+          <textarea name="trabajo" rows="6" placeholder="Describa el trabajo realizado ..."></textarea>
+        </fieldset>
+
+        <fieldset><legend>Pago</legend>
+          <div class="grid-pay">
+            <label class="stack">Valor del trabajo (CLP)<input name="valorTrabajo" type="number" min="0" step="1" /></label>
+            <label class="stack">Estado de Pago
+              <select name="estadoPago" id="estadoPago">
+                <option value="Pendiente">Pendiente de Pago</option>
+                <option value="Pagado">Pagado</option>
+                <option value="Abonado">Abonado</option>
+              </select>
+            </label>
+            <label class="stack hidden" id="labelAbono">Monto Abonado (CLP)<input name="montoAbonado" id="montoAbonado" type="number" min="0" step="1" /></label>
+          </div>
+        </fieldset>
+
+        <div class="firmas">
+          <div class="firma-box"><label>Firma Taller</label><input name="firmaTaller" /></div>
+          <div class="firma-box"><label>Firma Cliente</label><input name="firmaCliente" /></div>
+        </div>
+
+        <section class="notas">
+          <h4>Notas importantes</h4>
+          <ul>
+            <li>Toda herramienta no retirada en 30 días podrá generar cobro por almacenamiento.</li>
+            <li>FuelTek no se responsabiliza por accesorios no declarados al momento de la recepción.</li>
+          </ul>
+        </section>
+      </form>
+    </main>
+
+    <footer>
+      <p>© 2025 FUELTEK</p>
+    </footer>
+  </div>
+
+  <!-- modal lista OT -->
+  <div id="modal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Órdenes guardadas</h3>
+        <div>
+          <input id="searchOt" placeholder="Buscar por OT o cliente..." />
+          <button id="closeModal" class="small">Cerrar</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="ordersList" class="orders-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="printArea" class="print-area" style="display:none"></div>
+
+  <!-- scripts modularizados -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
